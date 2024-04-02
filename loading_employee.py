@@ -1,5 +1,5 @@
-class employee: # open version
-    def __init__(self,name,cook,bread,noodle_fry,noodle_ya,pack,order,drink,korea_dishes):
+class employee: 
+    def __init__(self,input_list):
         
         """
         cook:         煎台
@@ -11,5 +11,5 @@ class employee: # open version
         drink:        飲料
         korea_dishes: 韓式
         """
-        self.name = name
-        self.ability_list = [cook, bread, noodle_fry, noodle_ya , pack, order, drink, korea_dishes] 
+        self.name = input_list[0]
+        self.ability_list = input_list[1:] 
