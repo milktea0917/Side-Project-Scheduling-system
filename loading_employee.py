@@ -13,6 +13,7 @@ class employee:
         flexible:             機動
         weekday/weekend/both: 1, 2, 3
         absent: string or nan(float)
+        precentage: a precentage to control the arranging total amounts
         """
         self.name = input_list[0]
         self.ability_list = input_list[1:9]
@@ -37,8 +38,10 @@ def split_weekday_weekend(worker_list):
             weekday_worker_list.append(worker_list[i])
         elif worker_list[i].pt_time == 2:
             weekend_worker_list.append(worker_list[i])
-        else:
+        elif worker_list[i].pt_time == 3:
             weekday_worker_list.append(worker_list[i])
-            weekend_worker_list.append(worker_list[i])
+            weekend_worker_list.append(worker_list[i]) 
+        else:
+            logging.error(f"something went wrong in pt_time.")
         
     return weekday_worker_list, weekend_worker_list
