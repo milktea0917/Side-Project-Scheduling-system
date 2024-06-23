@@ -1,6 +1,6 @@
 import logging
-class employee: 
-    def __init__(self,input_list):
+class Employee: 
+    def __init__(self, input_list): # "初始化，讀職"
         
         """
         cook:                 煎台
@@ -13,7 +13,7 @@ class employee:
         flexible:             機動
         weekday/weekend/both: 1, 2, 3
         absent: string or nan(float)
-        precentage: a precentage to control the arranging total amounts
+        precentage: a precentage to control the arranging total amounts # mabye future
         """
         self.name = input_list[0]
         self.ability_list = input_list[1:9]
@@ -29,19 +29,19 @@ class employee:
         # print(f"self.pt_time: {self.pt_time}")
         # print(f"self.absent_time: {self.absent_time}")
 
-def split_weekday_weekend(worker_list):
-    weekday_worker_list = []
-    weekend_worker_list = []
-    for i in range(len(worker_list)): # ability_list[-2] = weekday/weekend/both
+    def SplitWeekdayWeekend(worker_list): # "用來將員工劃分成'平日班'、'假日班'"
+        weekday_worker_list = []
+        weekend_worker_list = []
+        for i in range(len(worker_list)): # ability_list[-2] = weekday/weekend/both
 
-        if worker_list[i].pt_time == 1:
-            weekday_worker_list.append(worker_list[i])
-        elif worker_list[i].pt_time == 2:
-            weekend_worker_list.append(worker_list[i])
-        elif worker_list[i].pt_time == 3:
-            weekday_worker_list.append(worker_list[i])
-            weekend_worker_list.append(worker_list[i]) 
-        else:
-            logging.error(f"something went wrong in pt_time.")
-        
-    return weekday_worker_list, weekend_worker_list
+            if worker_list[i].pt_time == 1:
+                weekday_worker_list.append(worker_list[i])
+            elif worker_list[i].pt_time == 2:
+                weekend_worker_list.append(worker_list[i])
+            elif worker_list[i].pt_time == 3:
+                weekday_worker_list.append(worker_list[i])
+                weekend_worker_list.append(worker_list[i]) 
+            else:
+                logging.error(f"Something went wrong in pt_time.")
+            
+        return weekday_worker_list, weekend_worker_list

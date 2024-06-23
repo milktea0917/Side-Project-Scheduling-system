@@ -1,3 +1,5 @@
+from reporter import CreatingXlsx
+
 def check_absent(date, worker_list):
 
     absent_pick = []
@@ -10,7 +12,7 @@ def check_absent(date, worker_list):
 
     return absent_pick
 
-def arranging_algo(work_space, worker_list, date):
+def ArrangeAlgo(work_space, worker_list, date):
 
     """
     ToDo: 
@@ -31,6 +33,8 @@ def arranging_algo(work_space, worker_list, date):
 
     if work_space == 4: # if weekday
 
+        # Xaio li 0600~0930 (No Thu)
+        # Lan 1000~1400 (Mon.~ Fri.)
         absent_pick = check_absent(str(date), worker_list)
         for i in [0,1,2,7]: 
             candidate_index = -9999
@@ -65,7 +69,7 @@ def arranging_algo(work_space, worker_list, date):
 
     return arranging_list, already_pick
 
-def arranging(work_space, worker_list, date):
+def Arranging(ReportXlsx, work_space, worker_list, date, week, month):
 
     # "make sure workers' status"
     # if absent_number>0:
@@ -79,12 +83,11 @@ def arranging(work_space, worker_list, date):
     # temp_results = arranging_algo(work_space, worker_list_new+worker_list[:2])
 
     "Start Runing"
-    arranging_list, already_pick = arranging_algo(work_space, worker_list, date)
-    if work_space == 8:
-        print(f"煎台:{arranging_list[0]}，麵包:{arranging_list[1]}，煮麵:{arranging_list[2]}，雅：{arranging_list[3]}，\
-        包餐：{arranging_list[4]}，點餐：{arranging_list[5]}，飲料：{arranging_list[6]}，機動：{arranging_list[7]}\n")
-    else:
-        print(f"煎台:{arranging_list[0]}，麵包:{arranging_list[1]}，\
-              煮麵:{arranging_list[2]}，機動：{arranging_list[3]} \n")
-        
+    arranging_list, already_pick = ArrangeAlgo(work_space, worker_list, date)
+    
+
+    # ReportXlsx.WriteDF(arranging_list, already_pick, date, week, week_count, month) # ToDo
+    ReportXlsx.DFtoTXT(arranging_list, date, week, month)
+    # ReportXlsx.ShowDailyResult(work_space, arranging_list)
+
     return arranging_list, already_pick
